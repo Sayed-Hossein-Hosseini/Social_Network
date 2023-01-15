@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -10,8 +11,11 @@ public class User implements IUser {
     private String phoneNumber;
     private String userName;
     private String password;
-    private String ID;
+    private String ID = "Stupid ";
+
+    private static int counter = 1;
     private Map<IUser, IConnector> following, follower;
+    private ArrayList<String> request = new ArrayList<>();
 
     //------------GET FUNCTIONS----------------
 
@@ -49,6 +53,10 @@ public class User implements IUser {
 
     public Map<IUser, IConnector> getOutgoing() {
         return following;
+    }
+
+    public Iterable<String> getRequest() {
+        return request;
     }
 
     //------------SET FUNCTIONS----------------
@@ -104,6 +112,20 @@ public class User implements IUser {
             throw new InvalidInput();
     }
 
+    public void setRequest(String request) {
+        this.request.add(request);
+    }
+
+    //-----------------ADD FUNCTION--------------------
+
+    //---------------REMOVE FUNCTION-------------------
+
+    public Iterable<String> removeRequest() {
+        ArrayList<String> output = request;
+        request.clear();
+        return output;
+    }
+
     //------------CONSTRUCTOR FUNCTIONS----------------
 
     public User(String name, String family, String email, String phoneNumber, String userName, String password, boolean isDirected) throws InvalidInput {
@@ -111,8 +133,10 @@ public class User implements IUser {
         this.setFamily(family);
         this.setEmail(email);
         this.setPhoneNumber(phoneNumber);
-        this.setUserName(userName);d
+        this.setUserName(userName);
         this.setPassword(password);
+        // Generate a unique ID
+        this.ID += counter ;
         // need separate incoming and outgoing maps
         follower = new HashMap<IUser, IConnector>();
         following = new HashMap<IUser, IConnector>();
