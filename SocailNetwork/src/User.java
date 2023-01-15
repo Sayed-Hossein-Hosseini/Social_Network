@@ -1,6 +1,8 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
-public class User {
+public class User implements IUser {
     //-----------PERSONAL INFORMATION----------
     private String name;
     private String family;
@@ -8,6 +10,8 @@ public class User {
     private String phoneNumber;
     private String userName;
     private String password;
+    private String ID;
+    private Map<IUser, IConnector> following, follower;
 
     //------------GET FUNCTIONS----------------
 
@@ -35,6 +39,18 @@ public class User {
         return password;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public Map<IUser, IConnector> getIncoming() {
+        return follower;
+    }
+
+    public Map<IUser, IConnector> getOutgoing() {
+        return following;
+    }
+
     //------------SET FUNCTIONS----------------
 
     public void setName(String name) throws InvalidInput {
@@ -49,7 +65,6 @@ public class User {
             this.family = family;
         else
             throw new InvalidInput();
-
     }
 
     public void setPhoneNumber(String phoneNumber) throws InvalidInput {
@@ -80,7 +95,6 @@ public class User {
             this.password = password;
         else
             throw new InvalidInput();
-
     }
 
     public void setUserName(String userName) throws InvalidInput {
@@ -92,12 +106,15 @@ public class User {
 
     //------------CONSTRUCTOR FUNCTIONS----------------
 
-    public User(String name, String family, String email, String phoneNumber, String userName, String password) throws InvalidInput{
+    public User(String name, String family, String email, String phoneNumber, String userName, String password, boolean isDirected) throws InvalidInput {
         this.setName(name);
         this.setFamily(family);
         this.setEmail(email);
         this.setPhoneNumber(phoneNumber);
-        this.setUserName(userName);
+        this.setUserName(userName);d
         this.setPassword(password);
+        // need separate incoming and outgoing maps
+        follower = new HashMap<IUser, IConnector>();
+        following = new HashMap<IUser, IConnector>();
     }
 }
