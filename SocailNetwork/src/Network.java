@@ -1,5 +1,9 @@
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.*;
 
 public class Network implements INetwork {
 
@@ -45,6 +49,76 @@ public class Network implements INetwork {
         userList.add(v);
         // Skip position.
         return (IUser) v;
+    }
+
+    public static HashMap<User, Float> sortByValue(HashMap<User, Float> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<User, Float> > list =
+               new LinkedList<Map.Entry<User, Float>>(hm.entrySet());
+ 
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<User, Float> >() {
+            public int compare(Map.Entry<User, Float> o1,
+                               Map.Entry<User, Float> o2)
+            {
+                return (o2.getValue()).compareTo(o1.getValue());
+            }
+        });
+         
+        // put data from sorted list to hashmap
+        HashMap<User, Float> temp = new LinkedHashMap<User, Float>();
+        for (Map.Entry<User, Float> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
+
+    public float rateSuggestion(User user1, User user2){
+        int count = 0;
+        for(Map.Entry<IUser, IConnector> set1 : user1.getFollowing().entrySet()){
+            User checkMutual = (User) set1.getKey();
+            if(user2.getFollowing().containsKey(checkMutual))
+                count++;
+        }
+        return ((float) count)/ ((float) (user1.getFollowing().size() + user2.getFollowing().size()));
+    }
+
+    public HashMap<User, Float> fillByNew(int count){
+        HashMap<User, Float> newUser = new HashMap<>();
+        for(int i = 1; i <= count && i <= userList.size(); i++)
+            newUser.put(userList.get(userList.size() - i), (float)0);
+        
+        return newUser;
+    }
+
+    // suggestions for all users
+    public void makeSuggestions(){
+        HashMap<User, Float> newUser = fillByNew(6);
+
+        for (int i = 0; i < userList.size(); i++){
+            User user1 = userList.get(i);
+            if(user1.getFollowing().size() == 0){
+                user1.setSuggestion(newUser);    
+                continue;
+            }
+            for(int j = i + 1; j < userList.size(); j++){
+                User user2 = userList.get(j);
+                if(user2.getFollowing().size() == 0)
+                    continue;
+                float rate = rateSuggestion(user1, user2);
+                user1.getSuggestion().put(user2, rate);
+                user2.getSuggestion().put(user1, rate);
+            }
+            if(user1.getSuggestion().size() < 6)
+                user1.getSuggestion().putAll(fillByNew(6 - user1.getSuggestion().size()));
+            HashMap<User, Float> sorted = sortByValue(user1.getSuggestion());
+            HashMap<User, Float> sug = new HashMap<>();
+            for(Map.Entry<User, Float> set1 : sorted.entrySet()){
+                sug.put(set1.getKey(), set1.getValue());
+            }
+            user1.setSuggestion(sug);
+        }
     }
 
     /** Create an Edge with the given element between nodes u and v. */

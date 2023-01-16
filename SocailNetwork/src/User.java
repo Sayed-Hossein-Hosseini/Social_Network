@@ -15,6 +15,7 @@ public class User implements IUser {
     private static int counter = 1;
     private boolean isDirected;
     private Map<IUser, IConnector> following, follower;
+    private HashMap<User, Float> suggestion = new HashMap<>();
     private ArrayList<String> request = new ArrayList<>();
 
     //------------GET FUNCTIONS----------------
@@ -61,6 +62,10 @@ public class User implements IUser {
 
     public Iterable<String> getRequest() {
         return request;
+    }
+
+    public HashMap<User, Float> getSuggestion(){
+        return suggestion;
     }
 
     //------------SET FUNCTIONS----------------
@@ -118,6 +123,10 @@ public class User implements IUser {
 
     public void setRequest(String request) {
         this.request.add(request);
+    }
+
+    public void setSuggestion(HashMap<User, Float> suggestion){
+        this.suggestion = suggestion;
     }
 
     //-----------------ADD FUNCTION--------------------
