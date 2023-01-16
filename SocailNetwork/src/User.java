@@ -12,8 +12,8 @@ public class User implements IUser {
     private String userName;
     private String password;
     private String ID = "Stupid ";
-
     private static int counter = 1;
+    private boolean isDirected;
     private Map<IUser, IConnector> following, follower;
     private ArrayList<String> request = new ArrayList<>();
 
@@ -47,11 +47,15 @@ public class User implements IUser {
         return ID;
     }
 
-    public Map<IUser, IConnector> getIncoming() {
-        return follower;
+    public Map<IUser, IConnector> getFollower() {
+        if(isDirected) {
+            return follower;
+        } else {
+            throw new IllegalArgumentException("Cannot call getFollower() on undirected graph.");
+        }
     }
 
-    public Map<IUser, IConnector> getOutgoing() {
+    public Map<IUser, IConnector> getFollowing() {
         return following;
     }
 
@@ -135,8 +139,15 @@ public class User implements IUser {
         this.setPhoneNumber(phoneNumber);
         this.setUserName(userName);
         this.setPassword(password);
+        this.isDirected = isDirected;
+        if (isDirected) {
+            // need separate incoming and outgoing maps
+            follower = new HashMap<IUser, IConnector>();
+        } else {
+            following = new HashMap<IUser, IConnector>();
+        }
         // Generate a unique ID
-        this.ID += counter ;
+        this.ID += counter;
         // need separate incoming and outgoing maps
         follower = new HashMap<IUser, IConnector>();
         following = new HashMap<IUser, IConnector>();
