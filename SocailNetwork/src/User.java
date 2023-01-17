@@ -18,6 +18,8 @@ public class User implements IUser {
     private HashMap<User, Float> suggestion = new HashMap<>();
     private ArrayList<String> request = new ArrayList<>();
 
+    private ArrayList<String> posts = new ArrayList<>();
+
     //------------GET FUNCTIONS----------------
 
     public String getName() {
@@ -66,6 +68,10 @@ public class User implements IUser {
 
     public HashMap<User, Float> getSuggestion(){
         return suggestion;
+    }
+
+    public ArrayList<String> getPosts() {
+        return posts;
     }
 
     //------------SET FUNCTIONS----------------
@@ -129,6 +135,10 @@ public class User implements IUser {
         this.suggestion = suggestion;
     }
 
+    public void setPosts(ArrayList<String> posts) {
+        this.posts = posts;
+    }
+
     //-----------------ADD FUNCTION--------------------
 
     //---------------REMOVE FUNCTION-------------------
@@ -160,5 +170,18 @@ public class User implements IUser {
         // need separate incoming and outgoing maps
         follower = new HashMap<IUser, IConnector>();
         following = new HashMap<IUser, IConnector>();
+    }
+
+    //------------TOSTRING FUNCTIONS----------------
+
+    @Override
+    public String toString() {
+        return "User {" + "\n" +
+                "name: " + name + "\n" +
+                "family: " + family + "\n" +
+                "email: " + email + "\n" +
+                "phoneNumber: " + phoneNumber + "\n" +
+                "ID: "  + ID + "\n" +
+                '}';
     }
 }
