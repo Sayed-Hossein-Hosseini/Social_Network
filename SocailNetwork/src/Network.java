@@ -96,7 +96,7 @@ public class Network implements INetwork {
     public void makeSuggestions(){
         HashMap<User, Float> newUser = fillByNew(6);
 
-        for (int i = 0; i < userList.size(); i++){
+        for (int i = 0; i < userList.size() - 1; i++){
             User user1 = userList.get(i);
             if(user1.getFollowing().size() == 0){
                 user1.setSuggestion(newUser);    
