@@ -114,8 +114,12 @@ public class Network implements INetwork {
                 user1.getSuggestion().putAll(fillByNew(6 - user1.getSuggestion().size()));
             HashMap<User, Float> sorted = sortByValue(user1.getSuggestion());
             HashMap<User, Float> sug = new HashMap<>();
+            int k = 0;
             for(Map.Entry<User, Float> set1 : sorted.entrySet()){
+                if(k == 6)
+                    break;
                 sug.put(set1.getKey(), set1.getValue());
+                k++;
             }
             user1.setSuggestion(sug);
         }
