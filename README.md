@@ -66,26 +66,13 @@ This project is a social network application designed for students worldwide to 
    java Main
    ```
 
-## Screenshots
+## User Interface
 
-Below are some screenshots of the application interface. You can replace the links with actual images of your application.
+The world of virtual networking starts here:
 
-![Main Page](https://via.placeholder.com/300)  
-![Add Post](https://via.placeholder.com/300)  
-![Edit Post](https://via.placeholder.com/300)  
-![Delete Post](https://via.placeholder.com/300)  
-![Edit Info](https://via.placeholder.com/300)  
-![Delete Account](https://via.placeholder.com/300)  
-![Edit Password](https://via.placeholder.com/300)  
-![Follower Page](https://via.placeholder.com/300)  
-![Following Page](https://via.placeholder.com/300)  
-![Home Page](https://via.placeholder.com/300)  
-![LogIn Page](https://via.placeholder.com/300)  
-![SignUp Page](https://via.placeholder.com/300)  
-![OtherHomePage](https://via.placeholder.com/300)  
-![PostPage](https://via.placeholder.com/300)  
-![UserPanel](https://via.placeholder.com/300)  
-![View_Posts](https://via.placeholder.com/300)  
+<p align="center">  
+  <img src="https://github.com/Sayed-Hossein-Hosseini/Social_Network/blob/main/Social%20Network.png" alt="User Interface" />  
+</p> 
 
 ## Contributing
 
