@@ -95,7 +95,11 @@ If you wish to contribute to this project, please create an Issue or submit a Pu
 
 This project is licensed under the MIT License. For more information, see the [LICENSE](LICENSE) file.
 
+## Authors  
+
+- Sayyed Hossein Hosseini DolatAbadi  
+- Zohreh Soorani
+
 ---
 
-We hope this social network application is useful for you. If you have any questions or suggestions, feel free to share them via Issues.
-```
+We hope this simple calculator is useful for you. If you have any questions or suggestions, feel free to share them via Issues.
